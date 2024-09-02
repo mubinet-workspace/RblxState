@@ -1,7 +1,7 @@
 {
   "name": "@rbxts/rblxstate",
   "version": "1.0.0",
-  "main": "out/init.lua",
+  "main": "out/EntryPoint.lua",
   "scripts": {
     "build": "rbxtsc",
     "watch": "rbxtsc -w",
@@ -28,5 +28,8 @@
     "eslint-plugin-roblox-ts": "^0.0.36",
     "roblox-ts": "^2.3.0",
     "typescript": "^5.5.4"
+  },
+  "dependencies": {
+    "@rbxts/services": "^1.5.4"
   }
 }
