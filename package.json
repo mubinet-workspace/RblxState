@@ -1,5 +1,5 @@
 {
-  "name": "@rbxts/source-code",
+  "name": "@rbxts/rblxstate",
   "version": "1.0.0",
   "main": "out/init.lua",
   "scripts": {
@@ -8,9 +8,9 @@
     "prepublishOnly": "npm run build"
   },
   "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "description": "",
+  "author": "Mubinet",
+  "license": "MIT",
+  "description": "A Roblox state management library designed with maximum simplicity in mind!",
   "types": "out/index.d.ts",
   "files": [
     "out",
