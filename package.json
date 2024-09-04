@@ -1,6 +1,6 @@
 {
   "name": "@rbxts/rblxstate",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "main": "out/EntryPoint.lua",
   "scripts": {
     "build": "rbxtsc",
@@ -30,6 +30,7 @@
     "typescript": "^5.5.4"
   },
   "dependencies": {
+    "@rbxts/react": "^0.4.0",
     "@rbxts/services": "^1.5.4"
   }
 }

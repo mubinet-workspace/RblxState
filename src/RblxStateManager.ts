@@ -94,15 +94,21 @@ namespace RblxStateManager {
                 const result = _newStateSetter(internalState._storage);
 
                 if (result) {
-                  // Update the value of the internal state.
-                  _updateInternalState(internalState, result);
+					// Compare the value
+					if (result !== internalState._storage) {
+						// Update the value of the internal state.
+						_updateInternalState(internalState, result);
+          			}
 
-                  // Return the updated value.
-                  return internalState._storage;
+                  	// Return the updated value.
+                  	return internalState._storage;
                 }
 			} else if (!typeIs(newState, "function")) {
-				// Update the value of the internal state.
-				_updateInternalState(internalState, newState);
+				// Compare the value
+				if (newState !== internalState._storage) {
+					// Update the value of the internal state.
+					_updateInternalState(internalState, newState);
+				}
 
 				// Return the updated value.
 				return internalState._storage;
@@ -110,8 +116,7 @@ namespace RblxStateManager {
 		}
    }
 
-   function _implementSubscribeFunction<Type>(stateUUID: string, callback: (newState: Type) => void) {
-		// Get the state metatable.
+   function _implementSubscribeFunction<Type>(stateUUID: string, callback: (newState: Type) => void) : (() => void) | undefined {
 		const internalState = _getInternalStateByUUID<Type>(stateUUID);
 
 		if (internalState) {
@@ -122,6 +127,17 @@ namespace RblxStateManager {
 			}
 
 			_subscribers.push(_subscriber);
+			
+			// Return the function to unsubscribe.
+			return function() {
+				// Find the index of the subscriber in the list.
+				const _subscriberIndex = _subscribers.indexOf(_subscriber);
+
+				if (_subscriberIndex !== -1) {
+					// Remove the subscriber from the list.
+					_subscribers.remove(_subscriberIndex);
+				}
+			}
 		}
    }
 
@@ -134,8 +150,8 @@ namespace RblxStateManager {
         // Create a new functional state
         const rblxStateFunctionalTable = {
           subscribe: (callback: (newState: Type) => void) => {
-			_implementSubscribeFunction<Type>(_stateUUID, callback);
-		  },
+			return _implementSubscribeFunction<Type>(_stateUUID, callback);
+		  }
         };
 
         // Create a new state metatable.

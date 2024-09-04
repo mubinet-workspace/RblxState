@@ -11,7 +11,9 @@ import { __createNewState } from "./RblxStateManager";
 /** 
  * @Purpose Create a new state.
 */
-export function createRblxState<Type>(state: Type) {
+function createRblxState<Type>(state: Type) {
     // Create a new state.
     return __createNewState(state);
 }
+
+export = createRblxState
